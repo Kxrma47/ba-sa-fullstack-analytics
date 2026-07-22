@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1700" viewBox="0 0 1180 1700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#263238"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1180" height="1700" fill="#ffffff"/>
+  <text x="590" y="42" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#111827">Task 3.2. Backend user registration algorithm</text>
+  <g font-family="Arial" font-size="17" fill="#111827">
+    <rect x="405" y="75" width="370" height="54" rx="27" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    <text x="590" y="109" text-anchor="middle">Start</text>
+    <rect x="345" y="170" width="490" height="68" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="590" y="198" text-anchor="middle">Receive POST /api/v1/users/register</text>
+    <text x="590" y="220" text-anchor="middle">from Register button</text>
+    <rect x="345" y="280" width="490" height="68" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="590" y="318" text-anchor="middle">Parse application/json request body</text>
+    <path d="M590 390 L720 455 L590 520 L460 455 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="450" text-anchor="middle">JSON valid?</text>
+    <rect x="805" y="424" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="449" text-anchor="middle">400</text>
+    <text x="940" y="471" text-anchor="middle">INVALID_JSON</text>
+    <path d="M590 560 L720 625 L590 690 L460 625 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="611" text-anchor="middle">Required fields</text>
+    <text x="590" y="633" text-anchor="middle">filled?</text>
+    <rect x="805" y="594" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="619" text-anchor="middle">400</text>
+    <text x="940" y="641" text-anchor="middle">VALIDATION_ERROR</text>
+    <path d="M590 730 L720 795 L590 860 L460 795 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="781" text-anchor="middle">Name and username</text>
+    <text x="590" y="803" text-anchor="middle">formats valid?</text>
+    <rect x="805" y="764" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="789" text-anchor="middle">400</text>
+    <text x="940" y="811" text-anchor="middle">FIELD_VALIDATION</text>
+    <path d="M590 900 L720 965 L590 1030 L460 965 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="951" text-anchor="middle">Password policy</text>
+    <text x="590" y="973" text-anchor="middle">passed?</text>
+    <rect x="805" y="934" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="959" text-anchor="middle">400</text>
+    <text x="940" y="981" text-anchor="middle">WEAK_PASSWORD</text>
+    <path d="M590 1070 L720 1135 L590 1200 L460 1135 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="1121" text-anchor="middle">CAPTCHA</text>
+    <text x="590" y="1143" text-anchor="middle">verified?</text>
+    <rect x="805" y="1104" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="1129" text-anchor="middle">422</text>
+    <text x="940" y="1151" text-anchor="middle">CAPTCHA_INVALID</text>
+    <rect x="345" y="1235" width="490" height="68" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="590" y="1263" text-anchor="middle">Start database transaction</text>
+    <text x="590" y="1285" text-anchor="middle">and check username uniqueness</text>
+    <path d="M590 1345 L720 1410 L590 1475 L460 1410 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="590" y="1396" text-anchor="middle">Username</text>
+    <text x="590" y="1418" text-anchor="middle">free?</text>
+    <rect x="805" y="1379" width="270" height="62" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="940" y="1404" text-anchor="middle">409</text>
+    <text x="940" y="1426" text-anchor="middle">USER_EXISTS</text>
+    <rect x="345" y="1515" width="490" height="68" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="590" y="1543" text-anchor="middle">Hash password, create active user,</text>
+    <text x="590" y="1565" text-anchor="middle">commit transaction</text>
+    <rect x="405" y="1620" width="370" height="54" rx="27" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+    <text x="590" y="1655" text-anchor="middle">Return 201 Created</text>
+  </g>
+  <g stroke="#263238" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <path d="M590 129 L590 170"/>
+    <path d="M590 238 L590 280"/>
+    <path d="M590 348 L590 390"/>
+    <path d="M720 455 L805 455"/>
+    <path d="M590 520 L590 560"/>
+    <path d="M720 625 L805 625"/>
+    <path d="M590 690 L590 730"/>
+    <path d="M720 795 L805 795"/>
+    <path d="M590 860 L590 900"/>
+    <path d="M720 965 L805 965"/>
+    <path d="M590 1030 L590 1070"/>
+    <path d="M720 1135 L805 1135"/>
+    <path d="M590 1200 L590 1235"/>
+    <path d="M590 1303 L590 1345"/>
+    <path d="M720 1410 L805 1410"/>
+    <path d="M590 1475 L590 1515"/>
+    <path d="M590 1583 L590 1620"/>
+  </g>
+  <g font-family="Arial" font-size="15" fill="#374151">
+    <text x="728" y="445">No</text>
+    <text x="610" y="545">Yes</text>
+    <text x="728" y="615">No</text>
+    <text x="610" y="715">Yes</text>
+    <text x="728" y="785">No</text>
+    <text x="610" y="885">Yes</text>
+    <text x="728" y="955">No</text>
+    <text x="610" y="1055">Yes</text>
+    <text x="728" y="1125">No</text>
+    <text x="610" y="1220">Yes</text>
+    <text x="728" y="1400">No</text>
+    <text x="610" y="1500">Yes</text>
+  </g>
+</svg>

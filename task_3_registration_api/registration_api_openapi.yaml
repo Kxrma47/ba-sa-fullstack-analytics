@@ -1,0 +1,255 @@
+openapi: 3.0.3
+info:
+  title: Book Store User Registration API
+  version: 1.0.0
+  description: REST API for user creation from the Register form.
+servers:
+  - url: https://api.demoqa.com
+paths:
+  /api/v1/users/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            examples:
+              success:
+                summary: Valid registration request
+                value:
+                  firstName: Ivan
+                  lastName: Ivanov
+                  username: ivan
+                  password: IvanPass1!
+                  captchaToken: 03AFcWeA7ValidCaptchaToken
+      responses:
+        '201':
+          description: User has been created.
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+              description: URL of the created user resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterUserSuccessResponse'
+              examples:
+                created:
+                  value:
+                    user:
+                      id: 7f624fc9-b67e-4d6b-b0e9-8052bbf0c8e1
+                      firstName: Ivan
+                      lastName: Ivanov
+                      username: ivan
+                      status: active
+                      createdAt: '2026-07-22T10:15:30Z'
+                    message: User Register Successfully.
+        '400':
+          description: Request body or field validation is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                weakPassword:
+                  value:
+                    errorCode: VALIDATION_ERROR
+                    message: Request contains invalid fields.
+                    fieldErrors:
+                      - field: password
+                        message: Password must be at least 8 characters and contain uppercase, lowercase, digit, and non-alphanumeric character.
+                    traceId: 4c2d8d9a2ed74bd7
+                missingField:
+                  value:
+                    errorCode: VALIDATION_ERROR
+                    message: Request contains invalid fields.
+                    fieldErrors:
+                      - field: firstName
+                        message: First name is required.
+                    traceId: 4c2d8d9a2ed74bd7
+        '409':
+          description: User with the same username already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userExists:
+                  value:
+                    errorCode: USER_EXISTS
+                    message: User exists!
+                    fieldErrors:
+                      - field: username
+                        message: User exists!
+                    traceId: 4c2d8d9a2ed74bd7
+        '415':
+          description: Unsupported media type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                unsupportedMediaType:
+                  value:
+                    errorCode: UNSUPPORTED_MEDIA_TYPE
+                    message: Content-Type must be application/json.
+                    fieldErrors: []
+                    traceId: 4c2d8d9a2ed74bd7
+        '422':
+          description: CAPTCHA verification failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                captchaInvalid:
+                  value:
+                    errorCode: CAPTCHA_INVALID
+                    message: Please verify reCaptcha to register!
+                    fieldErrors:
+                      - field: captchaToken
+                        message: Please verify reCaptcha to register!
+                    traceId: 4c2d8d9a2ed74bd7
+        '429':
+          description: Too many registration attempts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                tooManyRequests:
+                  value:
+                    errorCode: TOO_MANY_REQUESTS
+                    message: Too many registration attempts. Try again later.
+                    fieldErrors: []
+                    traceId: 4c2d8d9a2ed74bd7
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                serverError:
+                  value:
+                    errorCode: INTERNAL_ERROR
+                    message: Internal server error.
+                    fieldErrors: []
+                    traceId: 4c2d8d9a2ed74bd7
+components:
+  schemas:
+    RegisterUserRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - username
+        - password
+        - captchaToken
+      additionalProperties: false
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          pattern: "^[A-Za-zА-Яа-яЁё' -]+$"
+          description: User first name.
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          pattern: "^[A-Za-zА-Яа-яЁё' -]+$"
+          description: User last name.
+        username:
+          type: string
+          minLength: 3
+          maxLength: 30
+          pattern: '^[A-Za-z][A-Za-z0-9._-]{2,29}$'
+          description: Unique username used for login.
+        password:
+          type: string
+          minLength: 8
+          maxLength: 128
+          format: password
+          description: Password must contain uppercase, lowercase, digit, and non-alphanumeric character.
+        captchaToken:
+          type: string
+          minLength: 20
+          maxLength: 2048
+          description: CAPTCHA token received by the frontend after user verification.
+    RegisterUserSuccessResponse:
+      type: object
+      required:
+        - user
+        - message
+      additionalProperties: false
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        message:
+          type: string
+          example: User Register Successfully.
+    User:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - username
+        - status
+        - createdAt
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+        createdAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      required:
+        - errorCode
+        - message
+        - fieldErrors
+        - traceId
+      additionalProperties: false
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        fieldErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+        traceId:
+          type: string
+    FieldError:
+      type: object
+      required:
+        - field
+        - message
+      additionalProperties: false
+      properties:
+        field:
+          type: string
+        message:
+          type: string

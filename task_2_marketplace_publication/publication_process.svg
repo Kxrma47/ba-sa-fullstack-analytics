@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1360" viewBox="0 0 1200 1360">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f2937"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1360" fill="#ffffff"/>
+  <text x="600" y="46" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#111827">Task 2. Product publication process</text>
+  <g font-family="Arial" font-size="15" fill="#111827">
+    <circle cx="600" cy="95" r="24" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+    <text x="600" y="100" text-anchor="middle" font-size="12">Start</text>
+    <rect x="425" y="145" width="350" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="172" text-anchor="middle">Seller opens product creation form</text>
+    <text x="600" y="192" text-anchor="middle">in seller cabinet</text>
+    <rect x="425" y="245" width="350" height="64" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="600" y="272" text-anchor="middle">System creates product draft</text>
+    <text x="600" y="292" text-anchor="middle">status: draft</text>
+    <rect x="425" y="345" width="350" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="372" text-anchor="middle">Seller fills product data</text>
+    <text x="600" y="392" text-anchor="middle">and uploads images</text>
+    <rect x="425" y="445" width="350" height="64" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="600" y="472" text-anchor="middle">System saves product card</text>
+    <text x="600" y="492" text-anchor="middle">as draft</text>
+    <rect x="425" y="545" width="350" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="572" text-anchor="middle">Seller clicks Publish</text>
+    <text x="600" y="592" text-anchor="middle">to submit product</text>
+    <path d="M600 645 L730 710 L600 775 L470 710 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="600" y="705" text-anchor="middle">Validation</text>
+    <text x="600" y="725" text-anchor="middle">passed?</text>
+    <rect x="810" y="678" width="300" height="64" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="960" y="705" text-anchor="middle">Show field-level errors</text>
+    <text x="960" y="725" text-anchor="middle">status: validation_failed</text>
+    <rect x="425" y="815" width="350" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="600" y="842" text-anchor="middle">Set status moderation_pending</text>
+    <text x="600" y="862" text-anchor="middle">and send card to moderation</text>
+    <rect x="425" y="915" width="350" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="600" y="942" text-anchor="middle">Moderation checks content, images,</text>
+    <text x="600" y="962" text-anchor="middle">category rules and legal data</text>
+    <path d="M600 1015 L730 1080 L600 1145 L470 1080 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="600" y="1085" text-anchor="middle">Approved?</text>
+    <rect x="810" y="1048" width="300" height="64" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="960" y="1075" text-anchor="middle">Set status rejected</text>
+    <text x="960" y="1095" text-anchor="middle">and store rejection reason</text>
+    <rect x="250" y="1185" width="300" height="64" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="1212" text-anchor="middle">Set status published</text>
+    <text x="400" y="1232" text-anchor="middle">and update showcase</text>
+    <rect x="650" y="1185" width="300" height="64" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="800" y="1212" text-anchor="middle">Notify seller</text>
+    <text x="800" y="1232" text-anchor="middle">about result</text>
+    <circle cx="600" cy="1310" r="24" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+    <text x="600" y="1315" text-anchor="middle" font-size="12">End</text>
+  </g>
+  <g stroke="#1f2937" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <path d="M600 119 L600 145"/>
+    <path d="M600 209 L600 245"/>
+    <path d="M600 309 L600 345"/>
+    <path d="M600 409 L600 445"/>
+    <path d="M600 509 L600 545"/>
+    <path d="M600 609 L600 645"/>
+    <path d="M730 710 L810 710"/>
+    <path d="M960 742 L960 792 L1125 792 L1125 377 L775 377"/>
+    <path d="M600 775 L600 815"/>
+    <path d="M600 879 L600 915"/>
+    <path d="M600 979 L600 1015"/>
+    <path d="M730 1080 L810 1080"/>
+    <path d="M960 1112 L960 1160 L800 1160 L800 1185"/>
+    <path d="M600 1145 L400 1145 L400 1185"/>
+    <path d="M550 1217 L650 1217"/>
+    <path d="M800 1249 L800 1310 L624 1310"/>
+    <path d="M400 1249 L400 1310 L576 1310"/>
+  </g>
+  <g font-family="Arial" font-size="14" fill="#374151">
+    <text x="760" y="698">No</text>
+    <text x="620" y="800">Yes</text>
+    <text x="760" y="1068">No</text>
+    <text x="470" y="1135">Yes</text>
+    <text x="1042" y="775" text-anchor="middle">Fix and resubmit</text>
+  </g>
+  <g font-family="Arial" font-size="13" fill="#374151">
+    <rect x="50" y="82" width="260" height="120" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="68" y="108" font-weight="700">Actors and systems</text>
+    <text x="68" y="132">Seller, seller cabinet, catalog,</text>
+    <text x="68" y="152">media storage, moderation,</text>
+    <text x="68" y="172">showcase, notification service</text>
+  </g>
+</svg>

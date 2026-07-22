@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1420" viewBox="0 0 1200 1420">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f2937"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="1420" fill="#ffffff"/>
+  <text x="600" y="46" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#111827">Task 1. BPMN 2.0: IT equipment request process</text>
+  <g font-family="Arial" font-size="15" fill="#111827">
+    <circle cx="600" cy="95" r="24" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+    <text x="600" y="100" text-anchor="middle" font-size="12">Start</text>
+    <rect x="425" y="145" width="350" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="172" text-anchor="middle">Office user sends equipment request</text>
+    <text x="600" y="192" text-anchor="middle">by email or phone</text>
+    <rect x="425" y="245" width="350" height="64" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="600" y="272" text-anchor="middle">First line support registers ticket</text>
+    <text x="600" y="292" text-anchor="middle">in System #1</text>
+    <rect x="425" y="345" width="350" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="600" y="372" text-anchor="middle">User receives ticket number</text>
+    <text x="600" y="392" text-anchor="middle">and can track request status</text>
+    <rect x="425" y="445" width="350" height="64" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="600" y="472" text-anchor="middle">Support creates equipment request</text>
+    <text x="600" y="492" text-anchor="middle">in System #2 for supply</text>
+    <rect x="425" y="545" width="350" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="600" y="572" text-anchor="middle">Supply receives request in System #2</text>
+    <text x="600" y="592" text-anchor="middle">and checks email plus dashboard</text>
+    <rect x="425" y="645" width="350" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="600" y="672" text-anchor="middle">Supply checks equipment availability</text>
+    <text x="600" y="692" text-anchor="middle">in System #3</text>
+    <path d="M600 745 L730 810 L600 875 L470 810 Z" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="600" y="805" text-anchor="middle">Equipment</text>
+    <text x="600" y="825" text-anchor="middle">available?</text>
+    <rect x="130" y="940" width="340" height="64" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="300" y="967" text-anchor="middle">Supply sends purchase request</text>
+    <text x="300" y="987" text-anchor="middle">to supplier by email</text>
+    <rect x="130" y="1040" width="340" height="64" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="300" y="1067" text-anchor="middle">Supplier delivers equipment</text>
+    <text x="300" y="1087" text-anchor="middle">to supply department</text>
+    <rect x="130" y="1140" width="340" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="300" y="1167" text-anchor="middle">Supply registers incoming stock</text>
+    <text x="300" y="1187" text-anchor="middle">in System #3</text>
+    <rect x="730" y="940" width="340" height="64" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="900" y="967" text-anchor="middle">Supply calls logistics</text>
+    <text x="900" y="987" text-anchor="middle">for available equipment</text>
+    <rect x="430" y="1240" width="340" height="64" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="600" y="1267" text-anchor="middle">Logistics delivers equipment</text>
+    <text x="600" y="1287" text-anchor="middle">to first line support</text>
+    <rect x="430" y="1340" width="340" height="64" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+    <text x="600" y="1367" text-anchor="middle">Support issues equipment, closes</text>
+    <text x="600" y="1387" text-anchor="middle">System #1 ticket and System #2 request</text>
+    <rect x="820" y="1340" width="300" height="64" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="970" y="1367" text-anchor="middle">User receives equipment</text>
+    <text x="970" y="1387" text-anchor="middle">and may rate service</text>
+  </g>
+  <g stroke="#1f2937" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <path d="M600 119 L600 145"/>
+    <path d="M600 209 L600 245"/>
+    <path d="M600 309 L600 345"/>
+    <path d="M600 409 L600 445"/>
+    <path d="M600 509 L600 545"/>
+    <path d="M600 609 L600 645"/>
+    <path d="M600 709 L600 745"/>
+    <path d="M470 810 L300 810 L300 940"/>
+    <path d="M300 1004 L300 1040"/>
+    <path d="M300 1104 L300 1140"/>
+    <path d="M300 1204 L300 1272 L430 1272"/>
+    <path d="M730 810 L900 810 L900 940"/>
+    <path d="M900 1004 L900 1272 L770 1272"/>
+    <path d="M600 1304 L600 1340"/>
+    <path d="M770 1372 L820 1372"/>
+  </g>
+  <g font-family="Arial" font-size="14" fill="#374151">
+    <text x="365" y="800" text-anchor="middle">No</text>
+    <text x="835" y="800" text-anchor="middle">Yes</text>
+    <text x="210" y="852" text-anchor="middle">purchase path</text>
+    <text x="990" y="852" text-anchor="middle">stock path</text>
+  </g>
+  <g font-family="Arial" font-size="13" fill="#374151">
+    <rect x="40" y="80" width="270" height="118" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="58" y="106" font-weight="700">Actors and systems</text>
+    <text x="58" y="130">User, first line support, supply</text>
+    <text x="58" y="150">department, supplier, logistics</text>
+    <text x="58" y="170">System #1, System #2, System #3</text>
+  </g>
+</svg>

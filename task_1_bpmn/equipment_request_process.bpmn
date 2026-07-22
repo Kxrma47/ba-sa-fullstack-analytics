@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions_IT_Equipment_Request" targetNamespace="https://example.local/analytics/it-equipment-request">
+  <bpmn:collaboration id="Collaboration_IT_Equipment_Request">
+    <bpmn:participant id="Participant_User" name="Office user" processRef="Process_User"/>
+    <bpmn:participant id="Participant_Support" name="First line support" processRef="Process_Support"/>
+    <bpmn:participant id="Participant_Supply" name="Supply department" processRef="Process_Supply"/>
+    <bpmn:participant id="Participant_Logistics" name="Logistics" processRef="Process_Logistics"/>
+    <bpmn:participant id="Participant_Supplier" name="Supplier" processRef="Process_Supplier"/>
+    <bpmn:messageFlow id="Message_User_Request" name="Equipment request by email or phone" sourceRef="Task_User_Submit_Request" targetRef="Start_Support_Request_Received"/>
+    <bpmn:messageFlow id="Message_Ticket_Number" name="Ticket number" sourceRef="Task_Support_Register_Ticket" targetRef="Task_User_Track_Request"/>
+    <bpmn:messageFlow id="Message_Supply_Request" name="Equipment request in System #2" sourceRef="Task_Support_Create_Supply_Request" targetRef="Start_Supply_Request_Received"/>
+    <bpmn:messageFlow id="Message_Logistics_Request_Available" name="Dispatch request" sourceRef="Task_Supply_Request_Logistics_Available" targetRef="Start_Logistics_Dispatch_Request"/>
+    <bpmn:messageFlow id="Message_Logistics_Request_Purchase" name="Dispatch request" sourceRef="Task_Supply_Request_Logistics_Purchased" targetRef="Start_Logistics_Dispatch_Request"/>
+    <bpmn:messageFlow id="Message_Logistics_Delivery" name="Equipment delivered to support" sourceRef="Task_Logistics_Deliver_To_Support" targetRef="Task_Support_Issue_Equipment"/>
+    <bpmn:messageFlow id="Message_Purchase_Request" name="Purchase request by email" sourceRef="Task_Supply_Create_Purchase_Request" targetRef="Start_Supplier_Request"/>
+    <bpmn:messageFlow id="Message_Supplier_Delivery" name="Equipment delivery" sourceRef="Task_Supplier_Deliver_Equipment" targetRef="Task_Supply_Register_Stock"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_User" name="Office user process" isExecutable="false">
+    <bpmn:startEvent id="Start_User_Need" name="Need IT equipment"/>
+    <bpmn:task id="Task_User_Submit_Request" name="Send request by email or phone"/>
+    <bpmn:task id="Task_User_Track_Request" name="Track request by ticket number"/>
+    <bpmn:task id="Task_User_Receive_Equipment" name="Receive equipment"/>
+    <bpmn:task id="Task_User_Rate_Service" name="Rate IT support service"/>
+    <bpmn:endEvent id="End_User_Request_Done" name="Request completed"/>
+    <bpmn:sequenceFlow id="Flow_User_1" sourceRef="Start_User_Need" targetRef="Task_User_Submit_Request"/>
+    <bpmn:sequenceFlow id="Flow_User_2" sourceRef="Task_User_Submit_Request" targetRef="Task_User_Track_Request"/>
+    <bpmn:sequenceFlow id="Flow_User_3" sourceRef="Task_User_Track_Request" targetRef="Task_User_Receive_Equipment"/>
+    <bpmn:sequenceFlow id="Flow_User_4" sourceRef="Task_User_Receive_Equipment" targetRef="Task_User_Rate_Service"/>
+    <bpmn:sequenceFlow id="Flow_User_5" sourceRef="Task_User_Rate_Service" targetRef="End_User_Request_Done"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Support" name="First line support process" isExecutable="false">
+    <bpmn:startEvent id="Start_Support_Request_Received" name="User request received"/>
+    <bpmn:task id="Task_Support_Register_Ticket" name="Register ticket in System #1"/>
+    <bpmn:task id="Task_Support_Create_Supply_Request" name="Create equipment request in System #2"/>
+    <bpmn:intermediateCatchEvent id="Event_Support_Wait_Equipment" name="Wait for equipment"/>
+    <bpmn:task id="Task_Support_Issue_Equipment" name="Issue equipment to user"/>
+    <bpmn:task id="Task_Support_Close_System1" name="Close user ticket in System #1"/>
+    <bpmn:task id="Task_Support_Close_System2" name="Close supply request in System #2"/>
+    <bpmn:endEvent id="End_Support_Done" name="Support work completed"/>
+    <bpmn:sequenceFlow id="Flow_Support_1" sourceRef="Start_Support_Request_Received" targetRef="Task_Support_Register_Ticket"/>
+    <bpmn:sequenceFlow id="Flow_Support_2" sourceRef="Task_Support_Register_Ticket" targetRef="Task_Support_Create_Supply_Request"/>
+    <bpmn:sequenceFlow id="Flow_Support_3" sourceRef="Task_Support_Create_Supply_Request" targetRef="Event_Support_Wait_Equipment"/>
+    <bpmn:sequenceFlow id="Flow_Support_4" sourceRef="Event_Support_Wait_Equipment" targetRef="Task_Support_Issue_Equipment"/>
+    <bpmn:sequenceFlow id="Flow_Support_5" sourceRef="Task_Support_Issue_Equipment" targetRef="Task_Support_Close_System1"/>
+    <bpmn:sequenceFlow id="Flow_Support_6" sourceRef="Task_Support_Close_System1" targetRef="Task_Support_Close_System2"/>
+    <bpmn:sequenceFlow id="Flow_Support_7" sourceRef="Task_Support_Close_System2" targetRef="End_Support_Done"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Supply" name="Supply department process" isExecutable="false">
+    <bpmn:startEvent id="Start_Supply_Request_Received" name="Request received in System #2"/>
+    <bpmn:task id="Task_Supply_Check_Notifications" name="Check email and System #2 dashboard"/>
+    <bpmn:task id="Task_Supply_Check_Availability" name="Check availability in System #3"/>
+    <bpmn:exclusiveGateway id="Gateway_Equipment_Available" name="Equipment available?"/>
+    <bpmn:task id="Task_Supply_Request_Logistics_Available" name="Call logistics"/>
+    <bpmn:task id="Task_Supply_Create_Purchase_Request" name="Send purchase request to supplier by email"/>
+    <bpmn:intermediateCatchEvent id="Event_Supply_Wait_Delivery" name="Wait for supplier delivery"/>
+    <bpmn:task id="Task_Supply_Register_Stock" name="Register incoming stock in System #3"/>
+    <bpmn:task id="Task_Supply_Request_Logistics_Purchased" name="Call logistics"/>
+    <bpmn:endEvent id="End_Supply_Handed_Over" name="Equipment handed to logistics"/>
+    <bpmn:sequenceFlow id="Flow_Supply_1" sourceRef="Start_Supply_Request_Received" targetRef="Task_Supply_Check_Notifications"/>
+    <bpmn:sequenceFlow id="Flow_Supply_2" sourceRef="Task_Supply_Check_Notifications" targetRef="Task_Supply_Check_Availability"/>
+    <bpmn:sequenceFlow id="Flow_Supply_3" sourceRef="Task_Supply_Check_Availability" targetRef="Gateway_Equipment_Available"/>
+    <bpmn:sequenceFlow id="Flow_Supply_Yes" name="Yes" sourceRef="Gateway_Equipment_Available" targetRef="Task_Supply_Request_Logistics_Available"/>
+    <bpmn:sequenceFlow id="Flow_Supply_Yes_End" sourceRef="Task_Supply_Request_Logistics_Available" targetRef="End_Supply_Handed_Over"/>
+    <bpmn:sequenceFlow id="Flow_Supply_No" name="No" sourceRef="Gateway_Equipment_Available" targetRef="Task_Supply_Create_Purchase_Request"/>
+    <bpmn:sequenceFlow id="Flow_Supply_No_2" sourceRef="Task_Supply_Create_Purchase_Request" targetRef="Event_Supply_Wait_Delivery"/>
+    <bpmn:sequenceFlow id="Flow_Supply_No_3" sourceRef="Event_Supply_Wait_Delivery" targetRef="Task_Supply_Register_Stock"/>
+    <bpmn:sequenceFlow id="Flow_Supply_No_4" sourceRef="Task_Supply_Register_Stock" targetRef="Task_Supply_Request_Logistics_Purchased"/>
+    <bpmn:sequenceFlow id="Flow_Supply_No_End" sourceRef="Task_Supply_Request_Logistics_Purchased" targetRef="End_Supply_Handed_Over"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Logistics" name="Logistics process" isExecutable="false">
+    <bpmn:startEvent id="Start_Logistics_Dispatch_Request" name="Dispatch requested"/>
+    <bpmn:task id="Task_Logistics_Deliver_To_Support" name="Deliver equipment to first line support"/>
+    <bpmn:endEvent id="End_Logistics_Delivered" name="Delivered"/>
+    <bpmn:sequenceFlow id="Flow_Logistics_1" sourceRef="Start_Logistics_Dispatch_Request" targetRef="Task_Logistics_Deliver_To_Support"/>
+    <bpmn:sequenceFlow id="Flow_Logistics_2" sourceRef="Task_Logistics_Deliver_To_Support" targetRef="End_Logistics_Delivered"/>
+  </bpmn:process>
+  <bpmn:process id="Process_Supplier" name="Supplier process" isExecutable="false">
+    <bpmn:startEvent id="Start_Supplier_Request" name="Purchase request received"/>
+    <bpmn:task id="Task_Supplier_Deliver_Equipment" name="Deliver equipment to supply department"/>
+    <bpmn:endEvent id="End_Supplier_Delivered" name="Delivered"/>
+    <bpmn:sequenceFlow id="Flow_Supplier_1" sourceRef="Start_Supplier_Request" targetRef="Task_Supplier_Deliver_Equipment"/>
+    <bpmn:sequenceFlow id="Flow_Supplier_2" sourceRef="Task_Supplier_Deliver_Equipment" targetRef="End_Supplier_Delivered"/>
+  </bpmn:process>
+</bpmn:definitions>
